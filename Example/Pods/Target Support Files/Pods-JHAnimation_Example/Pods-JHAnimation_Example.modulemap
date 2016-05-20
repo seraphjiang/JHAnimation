@@ -1,0 +1,6 @@
+framework module Pods_JHAnimation_Example {
+  umbrella header "Pods-JHAnimation_Example-umbrella.h"
+
+  export *
+  module * { export * }
+}
