@@ -124,6 +124,7 @@
 		E3B1EAAC82543C09339AE71FE9B31AEC /* QuickSpec.h in Headers */ = {isa = PBXBuildFile; fileRef = 7395C69488EE986713CFCD76E434400B /* QuickSpec.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E6F6FF9554A6C7EABD6B92B691751DAD /* BeLessThanOrEqual.swift in Sources */ = {isa = PBXBuildFile; fileRef = 712924708985B1EB68BCE0D290D815FC /* BeLessThanOrEqual.swift */; };
 		E73A7ABBBDB582DEC9066F8F57D3DE1C /* Pods-JHAnimation_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = B1249DEFA51404A98A8350FF9CB34566 /* Pods-JHAnimation_Tests-dummy.m */; };
+		E8EA6FFE1CF10D44000A95EF /* JHLoadImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8EA6FFD1CF10D44000A95EF /* JHLoadImageView.swift */; };
 		E909D0D33037F3C642BBB8D47FC642B3 /* Nimble-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = B6203A309895700207A684C456765291 /* Nimble-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E9A500611CF699885DE8A6BAB4E6B392 /* BeEmpty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4957F682B3F1EE74D842B29320D0D131 /* BeEmpty.swift */; };
 		EAA652557B70F493923A3447B5D64E0D /* UIImage+Compare.h in Headers */ = {isa = PBXBuildFile; fileRef = BF446B28545341AFF094A94F8633BDF6 /* UIImage+Compare.h */; settings = {ATTRIBUTES = (Private, ); }; };
@@ -345,6 +346,7 @@
 		E614CEF798B620B0B98837100B736AF5 /* SatisfyAnyOf.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SatisfyAnyOf.swift; path = Sources/Nimble/Matchers/SatisfyAnyOf.swift; sourceTree = "<group>"; };
 		E7116E4797A8F559FBCC350C433EB2AB /* DSL.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DSL.swift; path = Sources/Nimble/DSL.swift; sourceTree = "<group>"; };
 		E772D3E5AF34E2F6DC985845FB3489AF /* EndWith.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = EndWith.swift; path = Sources/Nimble/Matchers/EndWith.swift; sourceTree = "<group>"; };
+		E8EA6FFD1CF10D44000A95EF /* JHLoadImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JHLoadImageView.swift; sourceTree = "<group>"; };
 		EA67375ED7A4B3A90A94312D0D93E05C /* HooksPhase.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = HooksPhase.swift; path = Sources/Quick/Hooks/HooksPhase.swift; sourceTree = "<group>"; };
 		EA9C21F8907FE9EF54A4CB45B8D6709F /* Quick-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Quick-prefix.pch"; sourceTree = "<group>"; };
 		EB52237EA8B2E15D1647F376674586CD /* FBSnapshotTestCase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FBSnapshotTestCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -589,6 +591,7 @@
 				045AB6E83D8FD0EB0F7A4BC8D93976D4 /* JHPingView.swift */,
 				0AE71D77F18B40DD443C9989246B462D /* JHPingViewDelegate.swift */,
 				6484ACE22F4A2AF2E008DE64737712FF /* RadialGradientLayer.swift */,
+				E8EA6FFD1CF10D44000A95EF /* JHLoadImageView.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -1109,6 +1112,7 @@
 				2C87E1788C8FA06AE3481A2226E3AF2D /* UIApplication+StrictKeyWindow.m in Sources */,
 				11C22C7B844DF31A5EBDC9AC132C5E94 /* UIImage+Compare.m in Sources */,
 				C360952381641F725C15758993A0F665 /* UIImage+Diff.m in Sources */,
+				E8EA6FFE1CF10D44000A95EF /* JHLoadImageView.swift in Sources */,
 				D5C30BC656C11AF60394E3180A217BB1 /* UIImage+Snapshot.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

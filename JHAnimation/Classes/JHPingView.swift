@@ -36,7 +36,8 @@ public class JHPingView: UIView, JHPingViewDelegate {
     func commonInit() {
         self.applyGesture()
 //        self.addGradientLayer()
-        self.addRadialGradientLayerMask()
+//        self.addRadialGradientLayerMask()
+        self.addCircleLayer()
     }
     
     func applyGesture(){
@@ -62,7 +63,8 @@ public class JHPingView: UIView, JHPingViewDelegate {
     
     public func resetAnimation() {
         self.layer.sublayers = nil
-        self.addRadialGradientLayerMask()
+//        self.addRadialGradientLayerMask()
+        self.addCircleLayer()
     }
     
     public func startAnimation() {
@@ -108,10 +110,21 @@ public class JHPingView: UIView, JHPingViewDelegate {
         return gradient
     }
     
+    func addCircleLayer() -> CALayer {
+        let lay = CAShapeLayer()
+        lay.path = UIBezierPath(ovalInRect: CGRectInset(bounds, bounds.size.width * 0.2 , bounds.size.height * 0.2)).CGPath
+        lay.fillColor = UIColor.redColor().CGColor
+        lay.shadowOpacity = 0.8
+        lay.shadowOffset = CGSizeMake(2, 2)
+        layer.addSublayer(lay)
+        return lay
+    }
+    
     func addRadialGradientLayerMask() -> CALayer {
         let bgLayer = addRadialGradientLayer(UIColor.redColor())
         let maskLayer = CAShapeLayer()
         maskLayer.path = UIBezierPath(ovalInRect: CGRectInset(bounds, bounds.size.width * 0.2 , bounds.size.height * 0.2)).CGPath
+
         bgLayer.mask = maskLayer
         return bgLayer
     }
