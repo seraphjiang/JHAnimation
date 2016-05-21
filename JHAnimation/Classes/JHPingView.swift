@@ -51,17 +51,25 @@ public class JHPingView: UIView, JHPingViewDelegate {
         }
         
         if (isAnimating) {
-            self.layer.sublayers = nil
-            self.addRadialGradientLayerMask()
+            self.resetAnimation()
         }
         else {
-            self.layer.sublayers = nil
-            self.animation_mask_repeat()
-            self.animation_mask_repeat1()
-            self.animation_mask_repeat2()
+            self.startAnimation()
         }
 
         isAnimating = !isAnimating
+    }
+    
+    public func resetAnimation() {
+        self.layer.sublayers = nil
+        self.addRadialGradientLayerMask()
+    }
+    
+    public func startAnimation() {
+        self.layer.sublayers = nil
+        self.animation_mask_repeat()
+        self.animation_mask_repeat1()
+        self.animation_mask_repeat2()
     }
     
     func drawGradientLayer() {
