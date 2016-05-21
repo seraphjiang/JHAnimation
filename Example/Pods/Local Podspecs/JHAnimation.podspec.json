@@ -1,6 +1,6 @@
 {
   "name": "JHAnimation",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "summary": "Animation libarary.",
   "description": "Views and Layers with animation supports.",
   "homepage": "https://github.com/seraphjiang/JHAnimation",
@@ -10,7 +10,7 @@
   },
   "source": {
     "git": "https://github.com/seraphjiang/JHAnimation.git",
-    "tag": "0.1.2"
+    "tag": "0.1.3"
   },
   "platforms": {
     "ios": "8.0"

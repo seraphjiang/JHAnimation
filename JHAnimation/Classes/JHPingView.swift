@@ -9,8 +9,10 @@
 import UIKit
 import QuartzCore
 
-public class JHPingView: UIView {
-    var isAnimating : Bool = false
+public class JHPingView: UIView, JHPingViewDelegate {
+    public var isAnimating : Bool = false
+    public var delegate: JHPingViewDelegate?
+    
     public override func drawRect(rect: CGRect) {
 //        self.drawGradientLayer()
     }
@@ -43,7 +45,10 @@ public class JHPingView: UIView {
         self.addGestureRecognizer(tappedRecognizer)
     }
 
-    func handleTap(recognizer:UITapGestureRecognizer) {
+    func handleTap(recognizer:UITapGestureRecognizer) {        
+        if self.delegate != nil {
+            self.delegate?.onTapped?(self.isAnimating)
+        }
         
         if (isAnimating) {
             self.layer.sublayers = nil
@@ -55,7 +60,7 @@ public class JHPingView: UIView {
             self.animation_mask_repeat1()
             self.animation_mask_repeat2()
         }
-        
+
         isAnimating = !isAnimating
     }
     
