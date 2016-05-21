@@ -10,7 +10,7 @@ import UIKit
 import QuartzCore
 
 public class JHPingView: UIView {
-    
+    var isAnimating : Bool = false
     public override func drawRect(rect: CGRect) {
 //        self.drawGradientLayer()
     }
@@ -34,8 +34,7 @@ public class JHPingView: UIView {
     func commonInit() {
         self.applyGesture()
 //        self.addGradientLayer()
-//        self.addRadialGradientLayer()
-        self.animation_mask_repeat()
+        self.addRadialGradientLayerMask()
     }
     
     func applyGesture(){
@@ -45,6 +44,19 @@ public class JHPingView: UIView {
     }
 
     func handleTap(recognizer:UITapGestureRecognizer) {
+        
+        if (isAnimating) {
+            self.layer.sublayers = nil
+            self.addRadialGradientLayerMask()
+        }
+        else {
+            self.layer.sublayers = nil
+            self.animation_mask_repeat()
+            self.animation_mask_repeat1()
+            self.animation_mask_repeat2()
+        }
+        
+        isAnimating = !isAnimating
     }
     
     func drawGradientLayer() {
@@ -74,16 +86,35 @@ public class JHPingView: UIView {
     func addRadialGradientLayer()  -> CALayer {
         
         let gradCenter: CGPoint = CGPointMake(self.bounds.size.width/2, self.bounds.size.height/2);
-        var gradRadius: CGFloat = min(self.bounds.size.width , self.bounds.size.height) ;
-        
+        let gradRadius: CGFloat = min(self.bounds.size.width , self.bounds.size.height) ;
         let colors:[CGColor] = [UIColor.redColor().CGColor , UIColor.whiteColor().CGColor]
-
         let gradient = RadialGradientLayer(center: gradCenter, radius: gradRadius, colors: colors)
         
         gradient.frame = self.bounds
         layer.insertSublayer(gradient, atIndex: 0)
         return gradient
     }
+    
+    func addRadialGradientLayerMask() -> CALayer {
+        let bgLayer = addRadialGradientLayer(UIColor.redColor())
+        let maskLayer = CAShapeLayer()
+        maskLayer.path = UIBezierPath(ovalInRect: CGRectInset(bounds, bounds.size.width * 0.2 , bounds.size.height * 0.2)).CGPath
+        bgLayer.mask = maskLayer
+        return bgLayer
+    }
+    
+    func addRadialGradientLayer( color: UIColor)  -> CALayer {
+        
+        let gradCenter: CGPoint = CGPointMake(self.bounds.size.width/2, self.bounds.size.height/2);
+        let gradRadius: CGFloat = min(self.bounds.size.width , self.bounds.size.height) ;
+        let colors:[CGColor] = [color.CGColor , UIColor.whiteColor().CGColor]
+        let gradient = RadialGradientLayer(center: gradCenter, radius: gradRadius, colors: colors)
+        
+        gradient.frame = self.bounds
+        layer.insertSublayer(gradient, atIndex: 0)
+        return gradient
+    }
+
     
     func addBackGroundLayer() -> CALayer {
         let bgLayer = CALayer()
@@ -93,36 +124,112 @@ public class JHPingView: UIView {
         return bgLayer
     }
     
+    
     func animation_mask_repeat() {
         let bgLayer = self.addRadialGradientLayer()
         
-//        let endBounds = CGRectInset(bounds, bounds.size.height / 3, bounds.size.height / 3)
-        let endBounds = CGRectInset(bounds, 0, 0)
-        let startBounds = CGRectInset(bounds, bounds.size.width / 2, bounds.size.height / 2)
+        let w = bounds.width / 2
+        let h = bounds.height / 2
+        let startBounds = CGRectInset(bounds, w * 0.8, h * 0.8)
+        let endBounds = CGRectInset(bounds, w * 0.6, h * 0.6)
         
         let oldPath = UIBezierPath(ovalInRect: startBounds)
         let newPath = UIBezierPath(ovalInRect: endBounds)
+        
         let layer1 = CAShapeLayer()
         layer1.path = oldPath.CGPath
         
         bgLayer.mask = layer1
-  
+        
         let ani1 = CABasicAnimation(keyPath: "path")
         ani1.fromValue = oldPath.CGPath
         ani1.toValue = newPath.CGPath
         ani1.beginTime = 0
-        ani1.duration = 0.5
+        ani1.duration = 0.3
         
         let ani2 = CABasicAnimation(keyPath: "path")
         ani2.fromValue = newPath.CGPath
         ani2.toValue = oldPath.CGPath
-        ani2.beginTime = 0.5
-        ani2.duration = 0.5
+        ani2.beginTime = ani1.duration
+        ani2.duration = 0.3
+        
+        let animationGroup: CAAnimationGroup = CAAnimationGroup()
+        animationGroup.animations = [ani1, ani2];
+        animationGroup.repeatCount = 10000
+        animationGroup.duration = ani1.duration + ani2.duration
+        
+        layer1.addAnimation(animationGroup, forKey: "path")
+    }
+    
+    func animation_mask_repeat1() {
+        let bgLayer = self.addRadialGradientLayer( UIColor.redColor().colorWithAlphaComponent(0.75))
+        
+        let w = bounds.width / 2
+        let h = bounds.height / 2
+        let startBounds = CGRectInset(bounds, w * 0.6, h * 0.6)
+        let endBounds = CGRectInset(bounds, w * 0.4, h * 0.4)
+        
+        let oldPath = UIBezierPath(ovalInRect: startBounds)
+        let newPath = UIBezierPath(ovalInRect: endBounds)
+        
+        let layer1 = CAShapeLayer()
+        layer1.path = oldPath.CGPath
+        
+        bgLayer.mask = layer1
+        
+        let ani1 = CABasicAnimation(keyPath: "path")
+        ani1.fromValue = oldPath.CGPath
+        ani1.toValue = newPath.CGPath
+        ani1.beginTime = 0
+        ani1.duration = 0.3
+        
+        let ani2 = CABasicAnimation(keyPath: "path")
+        ani2.fromValue = newPath.CGPath
+        ani2.toValue = oldPath.CGPath
+        ani2.beginTime = ani1.duration
+        ani2.duration = 0.3
+        
+        let animationGroup: CAAnimationGroup = CAAnimationGroup()
+        animationGroup.animations = [ani1, ani2];
+        animationGroup.repeatCount = 10000
+        animationGroup.duration = ani1.duration + ani2.duration
+        
+        layer1.addAnimation(animationGroup, forKey: "path")
+    }
+    
+    
+    func animation_mask_repeat2() {
+        let bgLayer = self.addRadialGradientLayer( UIColor.redColor().colorWithAlphaComponent(0.5) )
+        
+        let w = bounds.width / 2
+        let h = bounds.height / 2
+        let startBounds = CGRectInset(bounds, w * 0.4, h * 0.4)
+        let endBounds = CGRectInset(bounds, w * 0.2, h * 0.2)
+
+        let oldPath = UIBezierPath(ovalInRect: startBounds)
+        let newPath = UIBezierPath(ovalInRect: endBounds)
+        
+        let layer1 = CAShapeLayer()
+        layer1.path = oldPath.CGPath
+        
+        bgLayer.mask = layer1
+
+        let ani1 = CABasicAnimation(keyPath: "path")
+        ani1.fromValue = oldPath.CGPath
+        ani1.toValue = newPath.CGPath
+        ani1.beginTime = 0
+        ani1.duration = 0.3
+        
+        let ani2 = CABasicAnimation(keyPath: "path")
+        ani2.fromValue = newPath.CGPath
+        ani2.toValue = oldPath.CGPath
+        ani2.beginTime = ani1.duration
+        ani2.duration = 0.3
 
         let animationGroup: CAAnimationGroup = CAAnimationGroup()
         animationGroup.animations = [ani1, ani2];
         animationGroup.repeatCount = 10000
-        animationGroup.duration = 1
+        animationGroup.duration = ani1.duration + ani2.duration
         
         layer1.addAnimation(animationGroup, forKey: "path")
     }
