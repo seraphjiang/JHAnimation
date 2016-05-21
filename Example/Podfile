@@ -1,3 +1,4 @@
+source 'https://github.com/CocoaPods/Specs.git'
 use_frameworks!
 
 target 'JHAnimation_Example' do
@@ -8,7 +9,7 @@ target 'JHAnimation_Example' do
 
     pod 'Quick', '~> 0.8'
   pod 'Nimble', '~> 3.0'
-  pod 'FBSnapshotTestCase'
+  pod 'FBSnapshotTestCase', :git => 'https://github.com/facebook/ios-snapshot-test-case.git', :commit => 'b898c25'
   pod 'Nimble-Snapshots'
   end
 end
